@@ -9,7 +9,7 @@
         }
     ],
     "autoload": {
-        "psr-4": {"OutlineServerApi\\": "src/OutlineApiClient"}
+        "psr-4": {"OutlineApiClient\\": "src/OutlineApiClient"}
     },
     "require": {
         "php": ">=7.4",
