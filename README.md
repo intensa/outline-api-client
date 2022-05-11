@@ -9,7 +9,7 @@ The project implemented a class for working with OutlineVPN api methods and a cl
 Install the latest version with
 
 ```bash
-$ composer require IvanShishkin/outline-api-client
+$ composer require intensa/outline-api-client
 ```
 
 ## Requirements
