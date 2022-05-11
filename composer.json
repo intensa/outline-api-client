@@ -1,7 +1,7 @@
 {
-    "name": "ishishkin/outline-api-client",
+    "name": "intensa/outline-api-client",
     "description": "A simple API client for OutlineVPN written in PHP",
-    "keywords": ["outlinevpn","outlinevpn php"],
+    "keywords": ["outlinevpn","outline php"],
     "authors": [
         {
             "name": "Ivan Shishkin",
