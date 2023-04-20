@@ -1,11 +1,12 @@
 <?php
-namespace OutlineServerApi;
+namespace OutlineApiClient;
+
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use OutlineServerApi\Exceptions\OutlineApiException;
+use OutlineApiClient\Exceptions\OutlineApiException;
 
 class OutlineApiClient
 {
@@ -66,6 +67,7 @@ class OutlineApiClient
     public function getKeys()
     {
         $response = $this->request('/access-keys/');
+
         return json_decode($response->getBody()->getContents(), true);
     }
 
@@ -89,6 +91,7 @@ class OutlineApiClient
     public function delete($keyId): bool
     {
         $response = $this->request("/access-keys/{$keyId}", 'DELETE');
+
         return $response->getStatusCode() === 204;
     }
 
@@ -98,6 +101,7 @@ class OutlineApiClient
     public function metricsTransfer()
     {
         $response = $this->request('/metrics/transfer');
+
         return json_decode($response->getBody()->getContents(), true);
     }
 
@@ -107,6 +111,7 @@ class OutlineApiClient
     public function setName($keyId, $name): bool
     {
         $response = $this->request("/access-keys/{$keyId}/name", 'PUT', ['name' => $name]);
+
         return $response->getStatusCode() === 204;
     }
 
@@ -116,6 +121,7 @@ class OutlineApiClient
     public function setLimit($keyId, $limit = 0): bool
     {
         $response = $this->request("/access-keys/{$keyId}/data-limit", 'PUT', ['limit' => ['bytes' => $limit]]);
+
         return $response->getStatusCode() === 204;
     }
 

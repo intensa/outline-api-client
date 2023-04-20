@@ -1,6 +1,6 @@
 <?php
 
-namespace OutlineServerApi\Exceptions;
+namespace OutlineApiClient\Exceptions;
 
 class OutlineKeyException extends \Exception
 {

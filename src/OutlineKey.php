@@ -1,10 +1,9 @@
 <?php
+namespace OutlineApiClient;
 
-namespace OutlineServerApi;
-
-use OutlineServerApi\Exceptions\OutlineApiException;
-use OutlineServerApi\Exceptions\OutlineKeyException;
-use OutlineServerApi\Exceptions\OutlineKeyNotFoundException;
+use OutlineApiClient\Exceptions\OutlineApiException;
+use OutlineApiClient\Exceptions\OutlineKeyException;
+use OutlineApiClient\Exceptions\OutlineKeyNotFoundException;
 
 class OutlineKey
 {
@@ -22,7 +21,7 @@ class OutlineKey
 
 
     /**
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineApiException
      */
     public function __construct($server)
     {
@@ -47,8 +46,7 @@ class OutlineKey
 
     /**
      * @throws OutlineKeyException
-     * @throws OutlineKeyNotFoundException
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineKeyNotFoundException|OutlineApiException
      */
     public function get($keyId, $searchKey = 'id'): array
     {
@@ -81,7 +79,7 @@ class OutlineKey
     /**
      * @throws OutlineKeyNotFoundException
      * @throws OutlineKeyException
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineApiException
      */
     public function getByName($name): array
     {
@@ -91,7 +89,7 @@ class OutlineKey
     /**
      * @throws OutlineKeyException
      * @throws OutlineKeyNotFoundException
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineApiException
      */
     public function load($keyId): OutlineKey
     {
@@ -111,6 +109,7 @@ class OutlineKey
     {
         return $this->data['name'];
     }
+
 
     /**
      * @throws OutlineApiException
@@ -143,8 +142,8 @@ class OutlineKey
 
 
     /**
-     * @throws Exceptions\OutlineApiException
      * @throws OutlineKeyException
+     * @throws OutlineApiException
      */
     public function rename($newName)
     {
@@ -162,7 +161,7 @@ class OutlineKey
 
     /**
      * @throws OutlineKeyException
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineApiException
      */
     public function limit($limitValue)
     {
@@ -185,7 +184,7 @@ class OutlineKey
 
     /**
      * @throws OutlineKeyException
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineApiException
      */
     public function deleteLimit()
     {
@@ -205,8 +204,8 @@ class OutlineKey
     }
 
     /**
-     * @throws Exceptions\OutlineApiException
      * @throws OutlineKeyException
+     * @throws OutlineApiException
      */
     public function create($name, $limit = false): OutlineKey
     {
@@ -248,7 +247,7 @@ class OutlineKey
 
     /**
      * @throws OutlineKeyException
-     * @throws Exceptions\OutlineApiException
+     * @throws OutlineApiException
      */
     public function delete(): bool
     {

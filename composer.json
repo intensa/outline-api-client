@@ -11,10 +11,11 @@
         }
     ],
     "autoload": {
-        "psr-4": {"OutlineApiClient\\": "src/OutlineApiClient"}
+        "psr-4": {"OutlineApiClient\\": "src/"}
     },
     "require": {
         "php": ">=7.4",
-        "guzzlehttp/guzzle": "^7.0"
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-json": "*"
     }
 }
