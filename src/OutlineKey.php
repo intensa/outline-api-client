@@ -19,9 +19,6 @@ class OutlineKey
 
     protected bool $isLoaded = false;
 
-    // Create a private property to store the API response
-    private $cachedKeyData = null;
-
     /**
      * @throws OutlineApiException
      */
@@ -52,11 +49,6 @@ class OutlineKey
      */
     public function get($keyId, $searchKey = 'id', $useCache = true): array
     {
-        // Check if the response is already cached
-        if ($this->cachedKeyData !== null && $useCache) {
-            return $this->cachedKeyData;
-        }
-
         $getKeyList = $this->api->getKeys();
         $findKeyData = [];
 
@@ -77,11 +69,6 @@ class OutlineKey
 
         } else {
             throw new OutlineKeyException('Not transferred keys list');
-        }
-
-        // Cache the API response
-        if ($useCache) {
-            $this->cachedKeyData = $findKeyData;
         }
 
         return $findKeyData;
