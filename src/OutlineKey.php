@@ -59,6 +59,11 @@ class OutlineKey
         return $this->data;
     }
 
+    public function getMetricsTransfer(): array
+    {
+        return $this->data['metricsTransfer'];
+    }
+
 
     protected function isLoaded(): bool
     {
