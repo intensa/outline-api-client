@@ -14,7 +14,11 @@ class OutlineKey
         'password' => '',
         'port' => -1,
         'method' => '',
-        'accessUrl' => ''
+        'accessUrl' => '',
+        'metricsTransfer' => 0,
+        'dataLimit' => [
+            'bytes' => 0
+        ]
     ];
 
     protected bool $isLoaded = false;
@@ -25,6 +29,24 @@ class OutlineKey
     public function __construct($server)
     {
         $this->api = new OutlineApiClient($server);
+    }
+
+    /**
+     * @throws OutlineKeyException
+     * @throws OutlineKeyNotFoundException
+     * @throws OutlineApiException
+     */
+    public function load($keyId): OutlineKey
+    {
+        $data = $this->get($keyId);
+        $this->setData($data);
+
+        $metricsTransfer = $this->getTransfer();
+        $this->setData(['metricsTransfer' => $metricsTransfer]);
+
+        $this->isLoaded = true;
+
+        return $this;
     }
 
     protected function setData($setData)
@@ -52,23 +74,22 @@ class OutlineKey
         $getKeyList = $this->api->getKeys();
         $findKeyData = [];
 
-        if (!empty($getKeyList)) {
-            $list = $getKeyList['accessKeys'];
-
-            foreach ($list as $item) {
-
-                if ($keyId == $item[$searchKey]) {
-                    $findKeyData = $item;
-                    break;
-                }
-            }
-
-            if (empty($findKeyData)) {
-                throw new OutlineKeyNotFoundException('Key not found. You may create new key');
-            }
-
-        } else {
+        if (empty($getKeyList)) {
             throw new OutlineKeyException('Not transferred keys list');
+        }
+
+        $list = $getKeyList['accessKeys'];
+
+        foreach ($list as $item) {
+
+            if ($keyId == $item[$searchKey]) {
+                $findKeyData = $item;
+                break;
+            }
+        }
+
+        if (empty($findKeyData)) {
+            throw new OutlineKeyNotFoundException('Key not found. You may create new key');
         }
 
         return $findKeyData;
@@ -83,20 +104,6 @@ class OutlineKey
     public function getByName($name): array
     {
         return $this->get($name, 'name');
-    }
-
-    /**
-     * @throws OutlineKeyException
-     * @throws OutlineKeyNotFoundException
-     * @throws OutlineApiException
-     */
-    public function load($keyId): OutlineKey
-    {
-        $data = $this->get($keyId);
-        $this->setData($data);
-        $this->isLoaded = true;
-
-        return $this;
     }
 
     public function getId()

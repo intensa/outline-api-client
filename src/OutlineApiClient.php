@@ -15,6 +15,7 @@ class OutlineApiClient
 
     // Create a private property to store the API response
     private $cachedKeyData = null;
+    private $cachedMetrics = null;
 
     /**
      * @throws OutlineApiException
@@ -113,11 +114,23 @@ class OutlineApiClient
     /**
      * @throws OutlineApiException
      */
-    public function metricsTransfer()
+    public function metricsTransfer($useCache = true): array
     {
+        // Check if the response is already cached
+        if ($this->cachedMetrics !== null && $useCache) {
+            return $this->cachedMetrics;
+        }
+
         $response = $this->request('/metrics/transfer');
 
-        return json_decode($response->getBody()->getContents(), true);
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        // Cache the API response
+        if ($useCache) {
+            $this->cachedMetrics = $result;
+        }
+
+        return $result;
     }
 
     /**
