@@ -59,7 +59,7 @@ class OutlineKey
         return $this->data;
     }
 
-    public function getMetricsTransfer(): array
+    public function getMetricsTransfer()
     {
         return $this->data['metricsTransfer'];
     }
