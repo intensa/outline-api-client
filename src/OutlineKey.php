@@ -186,18 +186,18 @@ class OutlineKey
      * @throws OutlineKeyException
      * @throws OutlineApiException
      */
-    public function deleteLimit()
+    public function deleteLimit(): void
     {
         if ($this->isLoaded()) {
-            $deleteLimit = $this->api->delete($this->getId());
+            $deleteLimit = $this->api->deleteLimit($this->getId());
 
             if (!$deleteLimit) {
                 throw new OutlineKeyException('Error delete key limit');
-            } else {
-                $this->setData([
-                    'dataLimit' => []
-                ]);
             }
+
+            $this->setData([
+                'dataLimit' => []
+            ]);
         } else {
             throw new OutlineKeyException('Failed delete limit for key. Need load data key');
         }
